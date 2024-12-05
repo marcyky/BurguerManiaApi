@@ -14,6 +14,9 @@ namespace apiBurguer.Data
         public DbSet<ProdutoModel> Produtos { get; set; }
         public DbSet<PedidoModel> Pedidos { get; set; }
 
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
