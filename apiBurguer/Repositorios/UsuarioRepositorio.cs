@@ -16,7 +16,14 @@ namespace apiBurguer.Repositorios
         
         public async Task<UsuarioModel> BuscarPorId(int id)
         {
-            return await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+            var usuario = await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(usuario == null)
+            {
+                throw new Exception($"Usuário para o Id: {id} não foi encontrado no banco de dados.");
+            }
+
+            return usuario;
         }
         
         public async Task<List<UsuarioModel>> BuscarTodosUsuarios()
