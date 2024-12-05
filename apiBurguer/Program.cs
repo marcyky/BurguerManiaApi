@@ -1,4 +1,9 @@
 
+using apiBurguer.Data;
+using apiBurguer.Repositorios;
+using apiBurguer.Repositorios.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 namespace apiBurguer
 {
     public class Program
@@ -13,6 +18,15 @@ namespace apiBurguer
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddEntityFrameworkSqlServer()
+                .AddDbContext<BurguerManiaDBContext>(
+                    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+                );
+
+            builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+
+            builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
 
             var app = builder.Build();
 

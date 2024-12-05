@@ -1,4 +1,5 @@
-﻿using apiBurguer.Models;
+﻿using apiBurguer.Data.Map;
+using apiBurguer.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace apiBurguer.Data
@@ -16,6 +17,10 @@ namespace apiBurguer.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
+            modelBuilder.ApplyConfiguration(new PedidoMap());
+            modelBuilder.ApplyConfiguration(new ProdutoMap());
+
             base.OnModelCreating(modelBuilder);
         }
     }
